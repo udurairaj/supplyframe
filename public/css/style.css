@@ -1,0 +1,33 @@
+img {
+	width: 100%;
+	display: block;
+}
+
+.navbar-custom {
+	background-color: #03396c;
+	font-family: 'Oswald', sans-serif;
+	margin-bottom: 30px;
+}
+
+.poster-div {
+	position: relative;
+}
+
+.poster-div .img-overlay {
+	background-color: black;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	color: white;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	visibility: hidden;
+	opacity: 0.8;
+}
+
+.poster-div:hover .img-overlay {
+	visibility: visible;
+}
