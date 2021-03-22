@@ -6,6 +6,7 @@ function ajax(endpoint, returnFunc) {
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState == 4) {
 			if (httpRequest.status == 200) {
+				console.log(document.querySelector("#pagin").value);
 				returnFunc(httpRequest.responseText);
 			}
 			else {
@@ -21,6 +22,7 @@ var totalResults = 0;
 var totalPages = 0;
 
 function display(results) {
+	console.log(document.querySelector("#pagin").value);
 	let grid = document.querySelector("#grid");
 	while (grid.hasChildNodes()) {
 		grid.removeChild(grid.lastChild);
@@ -33,6 +35,15 @@ function display(results) {
 	totalPages = strResults.total_pages;
 	pageSize = strResults.results.length;
 
+	var currPage;
+	if (document.querySelector("#pagin").value == "") {
+		currPage = 1;
+	}
+	else
+	{
+		currPage = document.querySelector("#pagin").value;
+	}
+
 	let pagesList = document.querySelector("#pagin");
 	while (pagesList.hasChildNodes()) {
 		pagesList.removeChild(pagesList.lastChild);
@@ -44,6 +55,7 @@ function display(results) {
 		newPage.text  = page + 1;
 		pagesList.appendChild(newPage);
 	}
+	document.querySelector("#pagin").value = currPage;
 
 	document.querySelector("#results-showing").classList.remove("d-none");
 	document.querySelector("#results-showing").classList.add("d-inline");
@@ -126,11 +138,10 @@ function display(results) {
 let theatersEndpoint = "https://api.themoviedb.org/3/movie/now_playing?api_key=997d5afab1fcec94dbc66136953d1bee&language=en-US";
 ajax(theatersEndpoint, display);
 
-let currPage = 1;
-
-document.querySelector("#pagin").onchange = function() {
+document.querySelector("#pagin").onchange = function(event) {
+	event.preventDefault();
 	currPage = parseInt(document.querySelector("#pagin").value);
-	document.querySelector("#pagin").value = currPage;
+	
 	ajax (theatersEndpoint + "&page=" + currPage + "&limit=" + pageSize, display);
 }
 
@@ -150,10 +161,7 @@ document.querySelector("#search").onsubmit = function(event) {
 
 	document.querySelector("#pagin").onchange = function() {
 		currPage = parseInt(document.querySelector("#pagin").value);
-		document.querySelector("#pagin").value = currPage;
 		ajax (searchEndpoint + "&page=" + currPage + "&limit=" + pageSize, display);
-		console.log(document.querySelector("#pagin").value);
-		console.log(document.querySelector("#pagin").innerHTML);
 
 	}
 }
