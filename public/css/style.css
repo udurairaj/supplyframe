@@ -3,6 +3,10 @@ img {
 	display: block;
 }
 
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
 .navbar-custom {
 	background-color: #03396c;
 	font-family: 'Oswald', sans-serif;

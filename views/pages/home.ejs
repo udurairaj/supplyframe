@@ -23,13 +23,17 @@
 			</form>
 		</div>
 
-		<div class="row-12 mb-3">
-			Showing <strong><span id="showing-results">0</span></strong> of <strong><span id="total-results">0</span></strong> result(s).
+		<div class="row mb-3">
+			<div class="col-9 d-inline" id="results-showing">
+				Showing <strong><span id="start-results">0</span>-<span id="end-results">0</span></strong> of <strong><span id="total-results">0</span></strong> result(s). 
+			</div>
+			<div class="col-9 d-none" id="no-results">
+				No results found.
+			</div>
+			<%- include('../partials/pagination') %>
 		</div>
 
-		<div class="row" id="grid"></div>
-		
-		<%- include('../partials/pagination') %>		
+		<div class="row" id="grid"></div>		
 
 	</div>
 

@@ -4,10 +4,8 @@ function ajax(endpoint, returnFunc) {
 	httpRequest.send();
 
 	httpRequest.onreadystatechange = function() {
-		console.log(httpRequest.readyState);
 		if (httpRequest.readyState == 4) {
 			if (httpRequest.status == 200) {
-				console.log(httpRequest.responseText);
 				returnFunc(httpRequest.responseText);
 			}
 			else {
@@ -47,20 +45,20 @@ function display(results) {
 		pagesList.appendChild(newPage);
 	}
 
-	if (strResults.results.length < 20) {
-		document.querySelector("#showing-results").innerHTML = strResults.results.length;
-		}
-	else {
-			document.querySelector("#showing-results").innerHTML = 20;
-	}
+	document.querySelector("#results-showing").classList.remove("d-none");
+	document.querySelector("#results-showing").classList.add("d-inline");
+	document.querySelector("#no-results").classList.remove("d-inline");
+	document.querySelector("#no-results").classList.add("d-none");
+
+	document.querySelector("#start-results").innerHTML = ((currPage - 1) * pageSize) + 1;
+	document.querySelector("#end-results").innerHTML = ((currPage - 1) * pageSize) + pageSize;
 	document.querySelector("#total-results").innerHTML = strResults.total_results;
 
 	if (strResults.results.length == 0) {
-		let noneDiv = document.createElement("div");
-		let bold = document.createElement("strong");
-		bold.innerHTML = "No results found.";
-		noneDiv.appendChild(bold);
-		grid.appendChild(noneDiv);
+		document.querySelector("#results-showing").classList.remove("d-inline");
+		document.querySelector("#results-showing").classList.add("d-none");
+		document.querySelector("#no-results").classList.remove("d-none");
+		document.querySelector("#no-results").classList.add("d-inline");
 	}
 	else {
 		for (let i = 0; i < strResults.results.length; i++) {
@@ -70,7 +68,6 @@ function display(results) {
 
 			let posterRowDiv = document.createElement("div");
 			posterRowDiv.classList.add("poster-div");
-			// posterRowDiv.classList.add("row","poster-div");
 
 			let posterImg = document.createElement("img");
 			if (strResults.results[i].poster_path != null && strResults.results[i].poster_path != "") {
@@ -133,7 +130,7 @@ let currPage = 1;
 
 document.querySelector("#pagin").onchange = function() {
 	currPage = parseInt(document.querySelector("#pagin").value);
-	document.querySelector("#pagin").options[currPage].setAttribute("selected", true);
+	document.querySelector("#pagin").value = currPage;
 	ajax (theatersEndpoint + "&page=" + currPage + "&limit=" + pageSize, display);
 }
 
@@ -153,26 +150,12 @@ document.querySelector("#search").onsubmit = function(event) {
 
 	document.querySelector("#pagin").onchange = function() {
 		currPage = parseInt(document.querySelector("#pagin").value);
-		document.querySelector("#pagin").options[currPage].setAttribute("selected", true);
+		document.querySelector("#pagin").value = currPage;
 		ajax (searchEndpoint + "&page=" + currPage + "&limit=" + pageSize, display);
+		console.log(document.querySelector("#pagin").value);
+		console.log(document.querySelector("#pagin").innerHTML);
+
 	}
 }
 
-// pageSize = 8;
-
-// function showPage (page) {
-
-//     $(".line-content").hide();
-//     $(".line-content").each(function(n) {
-//         if (n >= pageSize * (page - 1) && n < pageSize * page)
-//             $(this).show();
-//     });        
-// }
-  
-// showPage(1);
-
-// $("#pagin li a").click(function() {
-//     $("#pagin li a").removeClass("current");
-//     $(this).addClass("current");
-//     showPage(parseInt($(this).text())) 
-// });
+//document.querySelector()
