@@ -1,6 +1,6 @@
 # Movie Madness!
 
-Movie Madness is a local web app that displays movie information pulled from The Movie DB API. The homepage displays movies in theaters and a search bar which can be used to search and display movies. The web app is built with Express with EJS, Bootstrap, vanilla JS, GitHub, and Nightwatch for basic testing.
+Movie Madness is a local web app that displays movie information pulled from The Movie DB API. The homepage displays movies in theaters and a search bar which can be used to search and display movies. Hovering over movies reveals their rating, the number of voters contributing to the rating, and a brief summary of the movie. The web app is built with Express with EJS, Bootstrap, vanilla JS, GitHub, and Nightwatch for basic testing.
 
 ## Installation
 
