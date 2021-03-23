@@ -156,9 +156,6 @@ document.querySelector("#search").onsubmit = function(event) {
 
 	ajax(searchEndpoint, display);
 
-	document.querySelector("#search-input").value = "";
-
-
 	document.querySelector("#pagin").onchange = function() {
 		currPage = parseInt(document.querySelector("#pagin").value);
 		ajax (searchEndpoint + "&page=" + currPage + "&limit=" + pageSize, display);

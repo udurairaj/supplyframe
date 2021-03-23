@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nightwatch",
     "start": "node server.js"
   },
   "repository": {
@@ -22,5 +22,8 @@
     "express": "^4.17.1",
     "nightwatch": "^1.5.1",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "chromedriver": "^89.0.0"
   }
 }
